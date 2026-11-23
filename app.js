@@ -175,7 +175,6 @@ document.addEventListener('click', event => {
 document.getElementById('toc-button').addEventListener('click', event => openDialog(toc, event.currentTarget));
 previous.addEventListener('click', () => goTo(current - 1));
 next.addEventListener('click', () => goTo(current === 7 ? 0 : current + 1));
-document.querySelector('.brand').addEventListener('click', event => { event.preventDefault(); goTo(0); });
 
 for (const dialog of [toc, guide]) {
   dialog.addEventListener('close', () => {

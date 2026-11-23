@@ -17,3 +17,5 @@ dialog{color:var(--ink);background:var(--paper);border:1.5px solid var(--ink);bo
 
 @media(max-width:760px){.scene{object-position:center 40%}.speech{left:5%;width:90%;max-width:none;font-size:25px;padding:12px 8px;line-height:1.08}}
 @media(max-width:380px){.speech{font-size:23px}}
+.site-header > .header-nav{margin-left:auto;min-height:42px}
+@media(max-width:760px){.site-header > .header-nav{min-height:38px}}
