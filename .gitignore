@@ -1,0 +1,7 @@
+node_modules/
+output/
+design/concept-*.png
+design/qa-*.png
+design/originals/
+*.log
+.DS_Store

@@ -1,0 +1,16 @@
+{
+  "name": "batoners-cb-story",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "바토너스 CB 투자 및 자문회의 운영 구상을 담은 8장 만화",
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node --check app.js && node --check server.mjs",
+    "verify": "node scripts/verify.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.65.1",
+    "sharp": "^0.35.5"
+  }
+}
