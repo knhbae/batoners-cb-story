@@ -104,7 +104,7 @@ function render({ animate = false, direction = 1, announce = true } = {}) {
   document.getElementById('next-label').textContent = current === 7 ? '처음부터' : '다음 이야기';
   previous.disabled = current === 0;
   next.setAttribute('aria-label', current === 7 ? '첫 이야기로 돌아가기' : '다음 이야기');
-  document.title = `${item.title} — 바토너스 CB 이야기`;
+  document.title = current === 0 ? '우리 모임의 다음 장' : `${item.title} · 우리 모임의 다음 장`;
   document.querySelectorAll('[data-page]').forEach(button => {
     const index = Number(button.dataset.page);
     if (index === current) button.setAttribute('aria-current', 'page');
@@ -141,7 +141,7 @@ function openDialog(dialog, trigger) {
 function closeDialog(dialog) { dialog.close(); }
 
 async function loadGuide() {
-  guidePromise ??= fetch('guide.html').then(response => {
+  guidePromise ??= fetch('guide.html', { cache: 'no-cache' }).then(response => {
     if (!response.ok) throw new Error('Could not load guide');
     return response.text();
   }).then(html => {
