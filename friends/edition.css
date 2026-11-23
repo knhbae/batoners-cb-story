@@ -1,4 +1,5 @@
 @font-face{font-family:GaeguFriends;src:url('../assets/gaegu-friends.woff2') format('woff2');font-weight:700;font-display:swap}
 :root{--title:GaeguFriends,'Malgun Gothic',sans-serif}
 .story-content .cover-terms{font-size:18px;color:var(--orange);margin:26px 0 0}
+.company-info-link{text-decoration:none;margin-bottom:12px}
 @media(max-width:760px){.story-content .cover-terms{font-size:16px;margin-top:20px}}

@@ -1,4 +1,5 @@
 const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>';
+const companyInfoUrl = 'https://www.saramin.co.kr/zf_user/company-info/view/csn/czY5ZzZWblpRVGF4VURVT1lUVEd4Zz09/company_nm/(%EC%A3%BC)%EB%B0%94%ED%86%A0%EB%84%88%EC%8A%A4';
 const examples = [
   { before: '3,000만원', after: '2,700만원', saving: 49.5, rate: '5.50', average: '16.5' },
   { before: '7,000만원', after: '6,700만원', saving: 79.2, rate: '8.80', average: '26.4' },
@@ -19,14 +20,14 @@ const pages = [
     title: '어떤 투자인가요?', image: '02-cb',
     alt: '세 사람이 계약서를 함께 읽으며 CB 투자 방식을 살펴봅니다.',
     speech: '벤처기업이 발행하는<br>CB에 투자하는 거야.',
-    content: () => '<h1>어떤 투자인가요?</h1><p>회사가 새로 발행하는 전환사채(CB)를 인수하는 투자예요. 참여 전에 회사와 계약 조건을 확인해요.</p><div class="definition"><b>CB</b><span>전환사채<br>조건에 따라 주식으로 바꿀 수 있는 채권</span></div><p>회사는 투자금을 우선 <strong>회사 명의 예금</strong>으로 보관할 계획이에요.</p><div class="mini-dialogue">투자자는 요건을 갖추면<br>소득공제를 신청해요.</div>',
+    content: () => `<h1>어떤 투자인가요?</h1><p>회사가 새로 발행하는 전환사채(CB)를 인수하는 투자예요. 참여 전에 회사와 계약 조건을 확인해요.</p><a class="text-link company-info-link" href="${companyInfoUrl}" target="_blank" rel="noopener noreferrer" aria-label="회사 정보 보기 · 사람인 (새 창)">회사 정보 보기 · 사람인 <span aria-hidden="true">↗</span></a><div class="definition"><b>CB</b><span>전환사채<br>조건에 따라 주식으로 바꿀 수 있는 채권</span></div><p>회사는 투자금을 우선 <strong>회사 명의 예금</strong>으로 보관할 계획이에요.</p><div class="mini-dialogue">투자자는 요건을 갖추면<br>소득공제를 신청해요.</div>`,
     footnote: '기업 자격·투자 방식·개인별 공제 요건을 충족해야 합니다.'
   },
   {
     title: '돈은 이렇게 움직여요', image: '03-flow',
     alt: '회사와 은행이 있는 거리에서 투자금의 흐름을 이야기하는 세 사람.',
-    speech: '300만원씩 10명이면<br>총 3,000만원이네!',
-    content: () => '<h1>돈은 이렇게<br>움직여요</h1><div class="flow"><div class="flow-row"><span class="flow-who">개인</span><span><strong>1인당 300만원 투자</strong><small>10명 참여 예시</small></span></div><div class="flow-row"><span class="flow-who">회사</span><span><strong>총 3,000만원 수령 → 예금 보관</strong><small>예금이자는 회사에 발생</small></span></div><div class="flow-row"><span class="flow-who">개인</span><span><strong>2027년 세금 정산 때 공제 반영</strong><small>환급액 증가 또는 납부세액 감소</small></span></div><div class="flow-row"><span class="flow-who">만기</span><span><strong>미전환 원금 상환 예정</strong><small>발행일부터 3년 경과 후 · 지급 이자 없음</small></span></div></div><p class="quiet">주식으로 전환하지 않고 만기까지 보유하는 예시예요.</p>',
+    speech: '1,000만원씩 10명이면<br>총 1억원이네!',
+    content: () => '<h1>돈은 이렇게<br>움직여요</h1><div class="flow"><div class="flow-row"><span class="flow-who">개인</span><span><strong>1인당 1,000만원 투자</strong><small>10명 참여 예시</small></span></div><div class="flow-row"><span class="flow-who">회사</span><span><strong>총 1억원 수령 → 예금 보관</strong><small>예금이자는 회사에 발생</small></span></div><div class="flow-row"><span class="flow-who">개인</span><span><strong>2027년 세금 정산 때 공제 반영</strong><small>환급액 증가 또는 납부세액 감소</small></span></div><div class="flow-row"><span class="flow-who">만기</span><span><strong>미전환 원금 상환 예정</strong><small>발행일부터 3년 경과 후 · 지급 이자 없음</small></span></div></div><p class="quiet">금액과 인원은 자금 흐름을 설명하기 위한 예시예요.</p>',
     footnote: '정해진 날짜에 절세액이 입금되는 구조는 아닙니다. 원금 상환은 보장되지 않습니다.'
   },
   {
