@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ede9df">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="모임 구성원의 지인·가족을 위한 CB 투자 안내. 300만원부터 100만원 단위로 참여하는 조건과 소득공제를 여덟 장의 만화로 살펴봅니다.">
+  <meta property="og:title" content="CB 투자와 소득공제 · 지인·가족 안내">
+  <meta property="og:description" content="모임 구성원의 지인·가족 대상. 300만원부터 100만원 단위. 투자 구조·소득공제·참여 조건을 확인하세요.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://knhbae.github.io/batoners-cb-story/assets/01-gathering.webp">
+  <meta name="color-scheme" content="light">
+  <title>CB 투자와 소득공제 · 지인·가족 안내</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../assets/gaegu-friends.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/01-gathering.webp" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="../styles.css?v=20261123-header">
+  <link rel="stylesheet" href="edition.css?v=1">
+  <script src="app.js?v=friends-1" type="module"></script>
+</head>
+<body>
+  <a class="skip-link" href="#book">이야기로 바로 가기</a>
+  <header class="site-header">
+    <nav class="header-nav" aria-label="자료 탐색">
+      <button type="button" id="toc-button" hidden>목차</button>
+      <a href="guide.html" data-open-guide>전체 내용</a>
+    </nav>
+  </header>
+
+  <main class="reader" id="main">
+    <article class="book" id="book" tabindex="-1" aria-label="CB 투자 이야기">
+      <div class="art-page">
+        <img class="scene" id="scene" src="../assets/01-gathering.webp" width="1120" height="1400" alt="카페에서 투자 조건을 이야기하는 세 사람" fetchpriority="high">
+        <p class="speech" id="speech">CB 투자,<br>어떤 조건일까?</p>
+      </div>
+      <section class="text-page" id="text-page">
+        <div class="page-number" id="page-number" aria-hidden="true">01 / 08</div>
+        <div class="story-content" id="story-content"></div>
+        <p class="page-footnote" id="page-footnote">지인·가족용 · 참여 의사 확인용 초안 · 2026.11.23</p>
+      </section>
+    </article>
+
+    <nav class="reader-controls" aria-label="이야기 페이지 이동">
+      <button class="arrow-button previous" id="previous" type="button" aria-label="이전 이야기" disabled>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m7-7-7 7 7 7"/></svg>
+        <span>이전</span>
+      </button>
+      <div class="progress-area">
+        <div class="progress" id="progress" aria-label="페이지 바로 가기"></div>
+        <span class="page-count" id="page-count" aria-hidden="true">1 / 8</span>
+      </div>
+      <button class="arrow-button next" id="next" type="button">
+        <span id="next-label">다음 이야기</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </button>
+    </nav>
+    <p class="navigation-hint"><span class="keyboard-hint">화살표 키 또는 </span>좌우 스와이프로 넘겨요</p>
+    <p class="sr-only" id="page-announcement" aria-live="polite" aria-atomic="true"></p>
+    <noscript><p class="no-script">만화 페이지를 넘기려면 자바스크립트를 켜 주세요. <a href="guide.html">전체 설명은 여기서 읽을 수 있습니다.</a></p></noscript>
+  </main>
+
+  <dialog id="toc-dialog" class="toc-dialog" aria-labelledby="toc-title">
+    <header class="dialog-header"><h2 id="toc-title">이야기 목차</h2><button class="close-button" type="button" data-close aria-label="목차 닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></header>
+    <ol id="toc-list" class="toc-list"></ol>
+    <p class="dialog-note">궁금한 장부터 읽어도 괜찮아요.</p>
+  </dialog>
+  <dialog id="guide-dialog" class="guide-dialog" aria-labelledby="guide-title">
+    <header class="dialog-header"><h2 id="guide-title">전체 내용과 근거</h2><button class="close-button" type="button" data-close aria-label="전체 내용 닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></header>
+    <div class="guide-dialog-content" id="guide-body"><p>설명문을 불러오는 중입니다.</p></div>
+  </dialog>
+</body>
+</html>

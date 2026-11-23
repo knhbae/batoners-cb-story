@@ -4,6 +4,8 @@
 
 - [만화 보기](https://knhbae.github.io/batoners-cb-story/)
 - [전체 설명과 법령·절차 근거](https://knhbae.github.io/batoners-cb-story/guide.html)
+- [지인·가족용 별도 안내](https://knhbae.github.io/batoners-cb-story/friends/): 모임 구성원의 지인·가족 대상, 300만원부터 100만원 단위
+- [두 안내본의 변경 내용 비교](design/FRIENDS-CHANGES.md)
 
 ## 읽는 방법
 
