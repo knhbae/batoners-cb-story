@@ -1,3 +1,4 @@
+import { investorTimeline, investorFootnote } from '../investor-timeline.js?v=1';
 const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>';
 const companyInfoUrl = 'https://www.saramin.co.kr/zf_user/company-info/view/csn/czY5ZzZWblpRVGF4VURVT1lUVEd4Zz09/company_nm/(%EC%A3%BC)%EB%B0%94%ED%86%A0%EB%84%88%EC%8A%A4';
 const examples = [
@@ -13,8 +14,8 @@ const pages = [
     title: 'CB 투자와 소득공제', image: '01-gathering',
     alt: '카페에 모인 세 사람이 소개받은 투자의 조건을 이야기합니다.',
     speech: 'CB 투자,<br>어떤 조건일까?',
-    content: () => '<h1 class="cover-title">CB 투자와<br>소득공제</h1><p class="cover-copy">모임 구성원의 지인·가족을 위한<br>여덟 장의 투자 안내.</p><p class="cover-terms"><strong>300만원부터 · 100만원 단위</strong></p>',
-    footnote: '지인·가족용 · 참여 의사 확인용 초안 · 2026.11.23'
+    content: () => `<h1 class="cover-title">CB 투자와 <br>소득공제</h1>${investorTimeline()}<p class="cover-terms"><strong>300만원부터 · 100만원 단위</strong><small>모임 구성원의 지인·가족만</small></p>`,
+    footnote: investorFootnote
   },
   {
     title: '어떤 투자인가요?', image: '02-cb',
@@ -55,7 +56,7 @@ const pages = [
     title: '참여 조건을 확인해요', image: '07-contract',
     alt: '계약서와 달력을 꼼꼼하게 확인하는 세 사람.',
     speech: '혜택만큼,<br>조건도 같이 읽어야지.',
-    content: () => '<h1>참여 조건을<br>확인해요</h1><ul class="rule-list"><li><b>모임 구성원의 지인·가족만</b><br>참여할 수 있어요.</li><li><b>300만원부터, 100만원 단위</b>예요.<br>300·400·500만원처럼 정해요.</li><li><b>3년 경과 후 만기</b>를 기준으로 검토하며, 투자자 이자는 없어요.</li><li>중도 회수는 <b>계약 조건과 회사와의 합의</b> 등에 따라 달라져요.</li></ul><p class="risk-note">3년 이내 회수·양도 시 원칙적으로 관련 공제 세액이 추징될 수 있어요. 원금 손실이나 상환 지연 가능성도 있어요.</p>',
+    content: () => '<h1>참여 조건을<br>확인해요</h1><ul class="rule-list"><li><b>모임 구성원의 지인·가족만</b><br>참여할 수 있어요.</li><li><b>300만원부터, 100만원 단위</b>예요.<br>300·400·500만원처럼 정해요.</li><li>공제 혜택 유지를 위해 <b>원칙적으로 투자일부터 3년 보유</b>해요.<br>만기는 3년 경과 후로 정하며, 투자자 이자는 없어요.</li><li>중도 회수는 <b>계약 조건과 회사와의 합의</b> 등에 따라 달라져요.</li></ul><p class="risk-note">3년이 지나기 전 회수·양도하면 법정 예외를 제외하고 공제 세액이 추징돼요. 원금 손실이나 상환 지연 가능성도 있어요.</p>',
     footnote: '검토안 기준입니다. 주식 전환·콜옵션 등 세부 조건은 계약 전에 안내·확정합니다.'
   },
   {
@@ -161,7 +162,15 @@ document.addEventListener('click', event => {
   const target = event.target.closest('button,a');
   if (!target) return;
   if (target.matches('[data-open-guide]')) {
-    event.preventDefault(); openDialog(guide, target); loadGuide();
+    event.preventDefault(); openDialog(guide, target);
+    loadGuide().then(() => {
+      if (!guide.open) return;
+      const section = target.dataset.guideSection === 'holding-period' ? guide.querySelector('#holding-period') : null;
+      if (section) {
+        section.scrollIntoView({ block: 'start', behavior: 'instant' });
+        section.focus({ preventScroll: true });
+      } else guide.scrollTop = 0;
+    });
   } else if (target.matches('[data-page]')) {
     if (toc.open) closeDialog(toc);
     goTo(Number(target.dataset.page));

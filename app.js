@@ -1,3 +1,4 @@
+import { investorTimeline, investorFootnote } from './investor-timeline.js?v=1';
 const arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>';
 const examples = [
   { before: '3,000만원', after: '2,000만원', saving: 165, rate: '5.50', average: '55' },
@@ -12,8 +13,8 @@ const pages = [
     title: '우리 모임의 다음 장', image: '01-gathering',
     alt: '카페 테이블에 모인 세 사람이 모임을 이어갈 방법을 이야기합니다.',
     speech: '우리 모임,<br>오래 이어가려면?',
-    content: () => '<h1 class="cover-title">우리 모임의<br>다음 장</h1><p class="cover-copy">CB 투자와 소득공제,<br>여덟 장의 만화로 알아봐요.</p>',
-    footnote: '참여 의사 확인용 초안 · 2026.11.23'
+    content: () => `<h1 class="cover-title">우리 모임의 <br>다음 장</h1>${investorTimeline()}<p class="cover-terms"><strong>100만원부터</strong><small>모임 구성원 대상</small></p>`,
+    footnote: investorFootnote
   },
   {
     title: '함께 투자한다는 건', image: '02-cb',
@@ -54,7 +55,7 @@ const pages = [
     title: '시작 전, 함께 확인해요', image: '07-contract',
     alt: '계약서와 달력을 꼼꼼하게 확인하는 세 사람.',
     speech: '혜택만큼,<br>조건도 같이 읽어야지.',
-    content: () => '<h1>시작 전,<br>함께 확인해요</h1><ul class="rule-list"><li><b>100만원부터</b> 참여하는 안이에요.</li><li><b>3년을 기준</b>으로 검토해요.<br>실제 만기는 발행일부터 3년이 지나도록 정해요.</li><li>투자자에게 지급하는 <b>이자는 없어요.</b></li><li>중도 회수는 <b>계약상 조건과 회사와의 합의</b> 등에 따라 달라져요.</li></ul><p class="risk-note">3년 이내 회수·양도 시 원칙적으로 관련 공제 세액이 추징될 수 있어요. 원금 손실이나 상환 지연 가능성도 있어요.</p>',
+    content: () => '<h1>시작 전,<br>함께 확인해요</h1><ul class="rule-list"><li><b>100만원부터</b> 참여하는 안이에요.</li><li>공제 혜택 유지를 위해 <b>원칙적으로 투자일부터 3년 보유</b>해요.<br>실제 만기는 3년이 지나도록 정해요.</li><li>투자자에게 지급하는 <b>이자는 없어요.</b></li><li>중도 회수는 <b>계약상 조건과 회사와의 합의</b> 등에 따라 달라져요.</li></ul><p class="risk-note">3년이 지나기 전 회수·양도하면 법정 예외를 제외하고 공제 세액이 추징돼요. 원금 손실이나 상환 지연 가능성도 있어요.</p>',
     footnote: '검토안 기준입니다. 주식 전환·콜옵션 등 세부 조건은 계약 전에 안내·확정합니다.'
   },
   {
@@ -160,7 +161,15 @@ document.addEventListener('click', event => {
   const target = event.target.closest('button,a');
   if (!target) return;
   if (target.matches('[data-open-guide]')) {
-    event.preventDefault(); openDialog(guide, target); loadGuide();
+    event.preventDefault(); openDialog(guide, target);
+    loadGuide().then(() => {
+      if (!guide.open) return;
+      const section = target.dataset.guideSection === 'holding-period' ? guide.querySelector('#holding-period') : null;
+      if (section) {
+        section.scrollIntoView({ block: 'start', behavior: 'instant' });
+        section.focus({ preventScroll: true });
+      } else guide.scrollTop = 0;
+    });
   } else if (target.matches('[data-page]')) {
     if (toc.open) closeDialog(toc);
     goTo(Number(target.dataset.page));
