@@ -1,4 +1,16 @@
+import { returnsMarkup } from './returns.js?v=3';
+
 export const sources = {
+  market: { title: '중소벤처기업부 · 2026년 1~3분기 벤처투자 동향 (2026.11)', url: 'https://www.mss.go.kr/site/smba/ex/bbs/View.do?bcIdx=1072576&cbIdx=86&parentSeq=1072576' },
+  seoul: { title: '서울거래 · 공식 회사 소개', url: 'https://seoulexchange.oopy.io/' },
+  seoulCB: { title: '서울거래 · 2023.12.04 CB 모집 공지 (신청 마감)', url: 'https://www.seoulexchange.kr/boards/notices/20231204%EC%84%9C%EC%9A%B8%EA%B1%B0%EB%9E%98-%EC%A3%BC%EC%8B%9D%ED%9A%8C%EC%82%AC-%EB%B0%9C%ED%96%89-%ED%88%AC%EC%9E%90%EC%9E%90-%EB%AA%A8%EC%A7%91/' },
+  seoulService: { title: '서울거래 · 비상장 주식 서비스 운영 규정', url: 'https://www.seoulexchange.kr/boards/terms/operation/' },
+  radexel: { title: '라덱셀 · 회사 소개와 연혁', url: 'https://radexel.com/about' },
+  radexelProducts: { title: '라덱셀 · 개발 제품과 인허가 단계', url: 'https://radexel.com/' },
+  radexelNews: { title: '라덱셀 게시 조선비즈 기사 · 352억원 R&D 과제 (2026.08.24)', url: 'https://radexel.com/news/?bmode=view&idx=173503859&q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&t=board' },
+  pensionExit: { title: '국세청 · 연금 외 수령의 과세', url: 'https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7888&mi=6608' },
+  localWithholding: { title: '지방세법 제103조의13 · 원천징수 소득세의 10% 특별징수', url: 'https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375' },
+  interest: { title: '국세청 · 이자소득 원천징수 세율', url: 'https://nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7703&mi=2291' },
   venture: { title: '조세특례제한법 제16조 · 공제율·한도·보유기간', url: 'https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1001022315' },
   tax: { title: '소득세법 제55조 · 종합소득세 세율', url: 'https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1032203257' },
   local: { title: '지방세법 제92조 · 개인지방소득세 세율', url: 'https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1029492599' },
@@ -16,9 +28,9 @@ export const sources = {
 };
 
 export const taxExamples = [
-  { before: 3000, after: 2000, saving: 165, rate: '5.50' },
-  { before: 7000, after: 6000, saving: 264, rate: '8.80' },
-  { before: 12000, after: 11000, saving: 385, rate: '12.83' }
+  { before: 3000, after: 2000, saving: 165, rate: '5.22' },
+  { before: 7000, after: 6000, saving: 264, rate: '8.12' },
+  { before: 12000, after: 11000, saving: 385, rate: '11.47' }
 ];
 const number = value => value.toLocaleString('ko-KR');
 const link = (key, label = sources[key].title) => `<a href="${sources[key].url}" target="_blank" rel="noopener noreferrer">${label} <span aria-hidden="true">↗</span></a>`;
@@ -37,10 +49,28 @@ export const slides = [
     notes: ['제도의 취지를 소개하고, 세금을 계산할 소득을 줄이는 방식임을 설명합니다.', '적격 직접투자 등의 공제율은 3천만원 이하분 100%, 3천만원 초과~5천만원 이하분 70%, 5천만원 초과분 30%입니다. 펀드·조합별 공제 방식은 같지 않습니다.', '현행 법은 2028년 말까지의 적격 투자를 대상으로 규정합니다. 이 자료의 이번 납입 목표는 2026년입니다.'], refs: ['venture']
   },
   {
+    id: 'market', section: '국내 현황', title: '국내 벤처투자는 어느 정도 규모일까요?', layout: 'market-slide',
+    body: `<p class="data-period">같은 기간 비교 · 각 연도 1~3분기 · 중소벤처기업부 2026.11 발표</p><div class="market-layout"><div class="market-bars" role="img" aria-label="1~3분기 신규 벤처투자액: 2023년 7.71조원, 2024년 8.65조원, 2025년 9.84조원, 2026년 12.62조원">${[['2023',7.7118],['2024',8.6463],['2025',9.8362],['2026',12.6248]].map(([year,value])=>`<div class="market-bar-row ${year==='2026'?'current':''}"><span>${year}</span><div><i style="width:${value/14*100}%"></i></div><strong>${value.toFixed(2)}조원</strong></div>`).join('')}<p class="chart-axis">0에서 시작하는 동일 척도 · 연간 전체 금액과 구분</p></div><div class="market-stat"><span>2026년 1~3분기</span><strong>12.62조원</strong><p>전년 같은 기간보다 <b>28.4% 증가</b></p><hr><p>상위 투자 분야<br><b>ICT 서비스 · 전기·기계·장비 · 바이오·의료</b></p></div></div><div class="source-strip"><span>발표 자료를 요약하고 수치를 그래프로 다시 구성했습니다.</span>${link('market','공식 발표 원문')}</div>`,
+    foot: '벤처투자회사·조합과 신기술금융사·조합의 합산 통계입니다. 개인 직접투자 소득공제 이용자 수나 수익률 통계가 아닙니다.',
+    notes: ['신규 벤처투자액은 2023년 1~3분기 77,118억원, 2024년 86,463억원, 2025년 98,362억원, 2026년 126,248억원입니다. 모두 같은 1~3분기 기간과 합산 기준입니다.', '2026년 상위 투자 분야는 ICT 서비스 2.5조원, 전기·기계·장비 2.2조원, 바이오·의료 1.9조원입니다. 기업의 성장단계·산업별 상황은 다릅니다.', '시장 규모 증가가 개별 기업의 성공, 원금 회수 또는 소득공제 적격성을 보장하지 않습니다. 개인 투자 사례는 다음 회사 자료와 구분해 설명합니다.'], refs: ['market']
+  },
+  {
     id: 'general-flow', section: '제도 이해', title: '투자금은 어떤 경로로 움직일까요?',
     body: `<div class="flow-line"><h2>직접투자</h2><div class="flow-path"><span>개인</span><i aria-hidden="true">→</i><span>벤처기업<br><small>신주·적격 CB 등</small></span><i aria-hidden="true">→</i><span>회사 사업</span></div></div><div class="flow-line"><h2>간접투자</h2><div class="flow-path"><span>개인</span><i aria-hidden="true">→</i><span>펀드·조합</span><i aria-hidden="true">→</i><span>투자기업</span></div></div><p class="takeaway">이번 구상: <strong>개인이 회사의 CB를 직접 인수</strong></p><p class="small">CB는 계약 조건에 따라 주식으로 전환할 수 있는 회사의 채권입니다.</p>`,
     foot: '투자금의 회수 방법과 공제 요건은 투자 방식·계약에 따라 다릅니다.',
     notes: ['이 장은 투자 경로를 설명하는 단순화한 도식입니다. 펀드·조합 출자와 회사 직접투자를 구분합니다.', '이번 자료에서는 개인이 새로 발행하는 무담보 CB를 인수하는 구상을 설명합니다. 기존 채권을 다른 사람에게서 사는 경우와 구분해야 합니다.'], refs: ['venture', 'faq']
+  },
+  {
+    id: 'seoul-case', section: '회사·사례', title: '서울거래: 비상장 거래 플랫폼과 CB 사례', layout: 'case-slide',
+    body: `<div class="case-columns"><div><h2>어떤 회사인가요?</h2><p>서울거래㈜가 운영하는<br><strong>비상장 주식 거래 플랫폼</strong></p><ul><li>투자자의 매매 주문을 증권사에 전달</li><li>비상장 기업의 주식을 사고파는 유통 서비스</li></ul><div class="link-row">${link('seoul','회사 소개')}${link('seoulService','서비스 운영 규정')}</div></div><div class="case-evidence"><span class="case-date">과거 공개 사례 · 2023.12.04 · 신청 마감</span><h2>운영회사 자체의<br>엔젤투자용 CB 모집</h2><dl class="case-terms"><div><dt>약정 이자</dt><dd>연 0%</dd></div><div><dt>만기</dt><dd>3년</dd></div><div><dt>당시 대상</dt><dd>등록 전문투자자</dd></div></dl>${link('seoulCB','당시 모집 공지 읽기')}</div></div><p class="case-takeaway">플랫폼에서 기존 주식을 매수하는 거래와, 운영회사 CB를 인수하는 투자는 구분합니다.</p>`,
+    foot: '현재 모집 안내가 아닌 과거 공지 사례입니다. 발표자의 실제 투자 조건·성과를 뜻하지 않습니다.',
+    notes: ['서울거래의 플랫폼 사업과 서울거래 주식회사가 자체 CB를 발행한 사례를 구분합니다. 플랫폼 거래를 했다는 사실만으로 소득공제 대상이 되지는 않습니다.', '2023년 12월 4일 공식 공지에는 연 이자율 0%, 3년 만기, 해지 45일 전 사전 협의, 등록 전문투자자 대상이 기재되어 있습니다. 현재 신청은 마감되어 있습니다.', '과거 공지의 “3년 이상 투자하여야 소득공제”라는 문구는 현재 법령 설명으로 그대로 옮기지 않았습니다. 투자한 해부터 공제 신청과 원칙적 3년 보유 요건을 구분합니다.', '이번 바토너스 계약의 중도 회수·전환·콜옵션 조건을 서울거래 사례와 같다고 취급하지 않습니다. 개인 경험과 수치는 발표자가 직접 설명합니다.'], refs: ['seoul', 'seoulService', 'seoulCB', 'venture']
+  },
+  {
+    id: 'radexel-case', section: '회사·사례', title: '라덱셀: 자기장 기반 방사선치료 기술 개발', layout: 'case-slide',
+    body: `<div class="case-columns"><div><h2>어떤 회사인가요?</h2><p><strong>2018년 설립 의료기기 기업</strong><br>자기장과 방사선치료를 결합한 MPRT 개발</p><ul><li>정상조직의 불필요한 방사선 노출을 줄이는 기술</li><li>모듈형·통합형·로봇형 제품을 개발 중</li></ul><div class="link-row">${link('radexel','회사 소개')}${link('radexelProducts','제품·개발 단계')}</div></div><div class="case-evidence"><span class="case-date">회사 게시 기사 · 조선비즈 2026.08.24</span><h2>7년간 총 352억원 규모<br>의료기기 R&D 과제</h2><p>라덱셀 컨소시엄 주관<br>서울아산병원·한국원자력연구원 등 참여</p><p class="small">정부지원금 279.5억원 포함.<br>라덱셀 단독의 민간 투자유치 금액이 아닙니다.</p>${link('radexelNews','관련 기사 읽기')}</div></div><p class="case-takeaway">개발·전임상 결과, 임상 검증, 제품 인허가는 단계가 다릅니다.</p>`,
+    foot: '회사 공개자료를 요약했습니다. 개발 중인 의료기기의 임상 효과나 상용화 완료를 보증하는 설명이 아닙니다.',
+    notes: ['공식 회사 연혁은 2018년 법인 설립, 2019년 서울아산병원에서 라덱셀로의 기술이전을 안내합니다. 연구 시작 시점인 2013년과 법인 설립일을 구분했습니다.', 'MPRT는 자기장으로 방사선치료 과정의 이차전자 경로를 조절해 정상조직의 피폭을 줄이는 것을 목표로 하는 기술입니다. 제품 소개의 개발·인허가 상태를 함께 확인합니다.', '2026년 8월 24일 회사 게시 조선비즈 기사에 따르면 라덱셀 컨소시엄의 과제 총사업비는 352억원, 정부지원금은 279.5억원, 기간은 7년입니다. 회사의 민간 투자금이나 현금 보유액으로 해석하지 않습니다.', '이 장은 회사 정보입니다. 발표자의 투자금·시기·실현 수익·상환 결과를 추정하지 않았습니다.'], refs: ['radexel', 'radexelProducts', 'radexelNews']
   },
   {
     id: 'experience', section: '경험', title: '제가 살펴본 투자 경험',
@@ -75,6 +105,12 @@ export const slides = [
     ], refs: ['venture', 'tax', 'local', 'card', 'donation']
   },
   {
+    id: 'returns', section: '3년 수익 비교', title: '3년 운용수익까지 합치면?', layout: 'returns-slide',
+    body: returnsMarkup(),
+    foot: '상품별 위험과 현금 회수 조건은 다릅니다. 수익률 가정은 전망·보장수익률이 아니며, CB는 원금 전액 상환을 가정했습니다.',
+    notes: ['총급여 1억원·추가 공제 전 과세표준 7,000만원, 최초 1,000만원만 납입하고 추가 납입은 없다고 가정합니다. 초기 절세액은 현금으로 보유하며 재투자하지 않습니다. 다른 공제 변화, 수수료의 추가 차감, 인플레이션, 기업 부도 확률은 반영하지 않았습니다. 운용수익률 입력은 수수료 차감 후·세전 가정입니다.', 'ISA·연금 수익률은 연 -5%, 0%, 3%, 5%, 7% 시나리오를 고를 수 있습니다. 특정 상품의 예상수익률이나 투자 권유가 아닙니다. 일반 예금은 연 3%가 3년간 같고, 매년 이자에 15.4%를 과세한 뒤 원리금을 재예치한다고 가정합니다. 금융소득 종합과세 대상이 아닌 경우입니다.', '일반형 ISA는 3년 보유 요건을 채워 정상 해지하고 다른 ISA 손익은 없다고 가정합니다. 세전 이익 = 1,000 × ((1+r)^3−1). 그 중 200만원을 넘는 양의 이익에 9.9%를 과세합니다. 다른 상품의 손익통산·해외 원천세 등은 제외했습니다.', '연금저축 단독은 600만원, 연금저축+IRP는 900만원을 처음에 세액공제 받아 각각 79.2만원, 118.8만원의 절세액을 적용합니다. 공제받지 않은 나머지 400만원/100만원을 이후 연도 납입금으로 전환해 추가 공제받는 경우는 제외합니다. 퇴직금 이전액은 없습니다.', '계좌 유지 모드는 연금의 3년 후 계좌 가치에 초기 세액공제를 더한 값입니다. 인출세를 빼기 전 값이므로 바로 사용 가능한 현금과 비교해서는 안 됩니다. 실제 연금 수령 시의 세금은 연령·수령 방법 등에 따라 달라집니다.', '3년 후 해지 모드는 일반적인 연금 외 수령을 가정합니다. 공제받지 않은 원금은 과세제외금액으로 확인되었다고 보고, 잔액에서 그 원금을 뺀 양수에 16.5%를 과세합니다. 부득이한 사유 예외나 정상 연금 수령에 해당하는 경우는 제외합니다. 중도 해지 권유가 아닙니다.', '합산효과는 초기 세금 감소액 + 운용·인출 후 증감액으로, 투자원금은 제외합니다. 누적 비교율 = 합산효과 ÷ 1,000만원, 연환산 = (1+누적 비교율)^(1/3)−1. 환급 시점을 반영한 IRR이 아니며, 뒤쪽 세액표도 같은 3년 복리 환산 방식을 사용합니다.', '소비·기부는 회수할 투자자산이 남는 동일한 상품이 아니므로 이 운용수익 표에서 제외했습니다. 지출 자체의 공제 효과는 앞 표에서 비교합니다.'], refs: ['venture', 'tax', 'local', 'pension', 'pensionExit', 'isa', 'interest', 'localWithholding']
+  },
+  {
     id: 'purpose', section: '우리 구상', title: '우리 모임에서는 왜 검토하나요?',
     body: `<ol class="statement-list"><li><span>01</span><div><strong>모임을 이어갈 재원 고민</strong><p>구성원의 벤처투자·소득공제 경험에서 출발</p></div></li><li><span>02</span><div><strong>모임 안의 벤처기업과 연결</strong><p>희망하는 구성원이 회사의 CB에 투자</p></div></li><li><span>03</span><div><strong>경험과 지식을 사업 자문으로</strong><p>실제 서비스·사업 개발에 필요한 의견을 나누는 구상</p></div></li></ol>`,
     foot: '일반 모임 비용과 회사의 사업 자문 비용은 구분합니다.',
@@ -87,16 +123,16 @@ export const slides = [
     notes: ['대표가 현재 사업과 이번 자금의 관리·상환 계획을 직접 설명하는 장입니다.', '회사소개 페이지와 재무 수치만으로 투자 적합성이나 상환능력을 단정하지 않습니다. 최신 재무자료·벤처확인서·계약 조건을 함께 확인합니다.'], refs: ['saramin', 'company', 'guide']
   },
   {
-    id: 'our-flow', section: '자금 흐름', title: '1,000만원을 투자한다면',
-    body: `<p class="lead">개인 1,000만원 × 10명 = 회사 투자금 1억원 <span class="small">· 예시</span></p><ol class="money-timeline"><li><time>2026.12.18</time><span class="timeline-dot"></span><strong>1,000만원 납입</strong><p>계약 후 회사 계좌로<br><small>납입 목표일</small></p></li><li><time>2027년 세금 정산</time><span class="timeline-dot"></span><strong>소득공제 반영</strong><p>환급 증가 또는 납부 감소<br><small>개인별 요건 충족 시</small></p></li><li><time>투자일부터 3년 경과 후</time><span class="timeline-dot"></span><strong>만기 원금 상환 예정</strong><p>주식으로 전환하지 않은 원금<br><small>정확한 만기일은 계약서</small></p></li></ol><p class="takeaway">현재 구상: <strong>투자자 약정 이자 0%</strong> · 회사 예금이자는 회사에 귀속</p>`,
-    foot: '원금 상환은 보장되지 않습니다. 회사의 지급능력과 계약에 따라 상환합니다.',
-    notes: ['투자자의 현금 흐름부터 설명합니다. 회사는 납입금을 우선 회사 명의 예금으로 보관하는 계획입니다.', '공제 효과는 세금 계산 결과입니다. 특정 날짜에 정해진 절세액이 입금되는 구조는 아닙니다.', '3년 경과 후의 만기 상환을 가정한 예시입니다. 전환·조기상환 등의 경우에는 계약과 세법 요건을 별도로 적용합니다.'], refs: ['venture', 'faq', 'guide']
+    id: 'our-flow', section: '자금 흐름', title: '투자자와 회사의 돈은 이렇게 움직입니다', layout: 'flow-slide',
+    body: `<p class="flow-example">1인 1,000만원 × 10명 = 회사 납입금 1억원 · 아래 금액은 예시</p><div class="fund-flow"><div class="fund-row payment"><div class="fund-stage"><b>납입</b><span>2026.12.18 목표</span></div><div class="fund-node">투자자 10명<small>개인별 1,000만원</small></div><div class="fund-arrow"><strong>합계 1억원</strong><i aria-hidden="true"></i></div><div class="fund-node">회사 명의 예금<small>투자자는 CB 보유</small></div></div><div class="fund-row operations-flow"><div class="fund-stage"><b>보유 기간</b><span>회사 자금 관리</span></div><div class="fund-node">회사 예금이자<small>회사에 귀속</small></div><div class="fund-arrow"><strong>세금·비용 고려</strong><i aria-hidden="true"></i></div><div class="fund-node">실제 사업 자문회의<small>예산 검토·지출 증빙</small></div></div><div class="fund-row tax-flow"><div class="fund-stage"><b>세금 정산</b><span>2027년</span></div><div class="fund-node">연말정산·종소세 신고<small>공제 요건 충족 시</small></div><div class="fund-arrow"><strong>개인별 264만원 예시</strong><i aria-hidden="true"></i></div><div class="fund-node">투자자의 세금 감소<small>환급 증가 또는 납부 감소</small></div></div><div class="fund-row repayment"><div class="fund-stage"><b>만기 상환</b><span>투자일부터 3년 경과 후</span></div><div class="fund-node">회사<small>만기·상환 조건은 계약서</small></div><div class="fund-arrow"><strong>개인별 원금 1,000만원</strong><i aria-hidden="true"></i></div><div class="fund-node">투자자<small>미전환 원금 · 약정 이자 0%</small></div></div></div><p class="flow-key">절세액은 회사가 지급하는 이자가 아닙니다. 예금이자는 회사에, 공제 효과는 투자자에게 귀속됩니다.</p>`,
+    foot: '264만원은 과세표준 7,000만원·전액 공제 예시입니다. 원금 상환은 회사 지급능력에 달려 있으며 보장되지 않습니다.',
+    notes: ['청색 화살표는 투자금 납입, 황갈색은 회사 예금이자의 사용 구상, 녹색은 개인의 세금 감소 효과, 회색은 만기 원금 상환입니다. 세금 감소 화살표는 세금 계산 효과를 뜻하며 회사 계좌에서 투자자에게 송금되는 돈이 아닙니다.', '회사 명의 예금의 원금은 회사 자산입니다. 투자자는 그 예금의 직접 예금주가 아니라 회사의 CB 채권자입니다. 회사의 예금 보관만으로 투자자 원금이 보장되지는 않습니다.', '회사 예금이자는 세금·운용비용을 고려한 뒤 실제 사업 자문회의 예산을 검토하는 구상입니다. 자문비 집행액·주기·담당은 확정 사항이 아닙니다.', '세금 감소 264만원은 앞 비교표와 같은 과세표준 7,000만원 → 6,000만원, 지방소득세 포함 예시입니다. 실제 효과·환급 시기는 개인별로 다릅니다.', '만기 원금 상환은 주식으로 전환하지 않은 CB가 계약상 만기에 정상 상환되는 경우를 가정합니다. 정확한 투자일·만기일은 등기와 계약에서 확인합니다.'], refs: ['venture', 'tax', 'local', 'faq', 'guide']
   },
   {
     id: 'tax-effect', section: '소득공제 효과', title: '실제 세금은 얼마나 줄어들까요?',
-    body: `<p class="lead">1,000만원 전액 소득공제 가정 <span class="small">· 지방소득세 포함</span></p><div class="table-wrap"><table class="tax-table"><thead><tr><th>공제 전 → 후 과세표준</th><th>세액 감소액</th><th>연환산 비교율<small>3년 단순 환산</small></th></tr></thead><tbody>${taxExamples.map(item=>`<tr><td><span>${number(item.before)} →</span> <span>${number(item.after)}만원</span></td><td><strong>${item.saving}만원</strong></td><td>${item.rate}%</td></tr>`).join('')}</tbody></table></div><p class="formula">연환산 비교율 = 세액 감소액 ÷ 1,000만원 ÷ 3년 × 100</p><p class="small">과세표준은 연봉과 다릅니다. 공제 요건·한도 충족과 다른 세액공제 변화가 없음을 가정합니다.</p>`,
+    body: `<p class="lead">1,000만원 전액 소득공제 가정 <span class="small">· 지방소득세 포함</span></p><div class="table-wrap"><table class="tax-table"><thead><tr><th>공제 전 → 후 과세표준</th><th>세액 감소액</th><th>연환산 비교율<small>3년 복리 환산</small></th></tr></thead><tbody>${taxExamples.map(item=>`<tr><td><span>${number(item.before)} →</span> <span>${number(item.after)}만원</span></td><td><strong>${item.saving}만원</strong></td><td>${item.rate}%</td></tr>`).join('')}</tbody></table></div><p class="formula">연환산 비교율 = [(1 + 세액 감소액 ÷ 1,000만원)^(1/3) − 1] × 100</p><p class="small">과세표준은 연봉과 다릅니다. 공제 요건·한도 충족과 다른 세액공제 변화가 없음을 가정합니다.</p>`,
     foot: '연환산 비교율은 회사가 매년 지급하는 이자나 보장수익률이 아닙니다.',
-    notes: ['표의 가운데 예시부터 설명하고 나머지 구간을 비교합니다. 투자금 전액이 공제되고 각 예시에서 같은 세율 구간 안에 머무는 것으로 계산했습니다.', '국세 세율 15%·24%·35%에 해당하는 예시이며 개인지방소득세를 함께 계산했습니다.', '복리, 환급 시점, 투자 손실, 다른 공제·세액공제의 변화는 반영하지 않았습니다. 실제 절세액이나 환급액은 개인별로 달라집니다.'], refs: ['venture', 'tax', 'local']
+    notes: ['표의 가운데 예시부터 설명하고 나머지 구간을 비교합니다. 투자금 전액이 공제되고 각 예시에서 같은 세율 구간 안에 머무는 것으로 계산했습니다.', '국세 세율 15%·24%·35%에 해당하는 예시이며 개인지방소득세를 함께 계산했습니다.', '연환산 비교율은 세액 감소액을 3년 복리 기준으로 환산한 값입니다. 공제액 재투자·환급 시점·투자 손실·다른 세액공제의 변화는 반영하지 않았습니다. 실제 절세액이나 환급액은 개인별로 달라집니다.'], refs: ['venture', 'tax', 'local']
   },
   {
     id: 'holding-period', section: '보유기간', title: '3년을 보유해야 하는 이유',

@@ -1,4 +1,5 @@
-import { slides, sources } from './slides.js?v=2';
+import { initializeReturns } from './returns.js?v=3';
+import { slides, sources } from './slides.js?v=3';
 
 const deck = document.getElementById('slides');
 const previous = document.getElementById('previous');
@@ -13,6 +14,8 @@ let animation;
 let pointer;
 
 function indexFromHash() {
+  const named = slides.findIndex(slide => `#${slide.id}` === location.hash);
+  if (named !== -1) return named;
   const value = location.hash.match(/^#slide-(\d+)$/)?.[1];
   const index = Number(value) - 1;
   return Number.isInteger(index) && index >= 0 && index < slides.length ? index : 0;
@@ -24,8 +27,9 @@ deck.innerHTML = slides.map((slide, index) => `<article class="slide ${slide.lay
   <footer class="slide-footer"><p>${slide.foot}</p>${slide.refs.length ? `<button type="button" data-notes="${index}" aria-label="${slide.title} 메모와 출처 보기">근거 보기 ↗</button>` : ''}</footer>
 </article>`).join('');
 deck.querySelectorAll('.table-wrap').forEach(wrapper=>{wrapper.setAttribute('role','region');wrapper.setAttribute('tabindex','0');wrapper.setAttribute('aria-label',`${wrapper.closest('.slide').querySelector('h1').textContent} 표`);});
+initializeReturns();
 document.getElementById('toc-list').innerHTML = slides.map((slide, index) => `<li><button type="button" data-slide="${index}"><span>${String(index + 1).padStart(2, '0')}</span>${slide.title}</button></li>`).join('');
-document.getElementById('print-sources').innerHTML = `<h1>출처와 계산 가정</h1><p>설명회 초안 · 2026.11.28. 투자 조건·일정은 검토안이며 최종 계약을 확인합니다.</p>${slides.filter(slide=>slide.refs.length).map(slide=>`<section><h2>${slide.title}</h2><ul>${slide.refs.map(key=>`<li>${sources[key].title}<br>${new URL(sources[key].url,location.href).href}</li>`).join('')}</ul></section>`).join('')}<p>세액 예시: 지방소득세 포함. 공제 비교표는 총급여 1억원·추가 공제 전 과세표준 7,000만원, 각 방법에 1,000만원을 별도로 사용한 경우입니다. 연금저축 단독 공제 한도 600만원·IRP 합산 900만원, 카드 기존 사용액 2,500만원·기본 한도 250만원·자녀 한도 가산 없음, 다른 한도 미사용을 가정합니다. 일반기부금은 종교단체 외 적격 단체입니다. ISA 운용소득의 과세 혜택은 별도입니다. 소득 구간별 벤처투자 세액표는 1,000만원 전액 소득공제를 가정합니다. 다른 세액공제 변화·환급 시점·복리·투자 손실 제외. 개인 경험의 수치·결과는 기재하지 않았습니다.</p>`;
+document.getElementById('print-sources').innerHTML = `<h1>출처와 계산 가정</h1><p>설명회 초안 · 2026.11.28. 투자 조건·일정은 검토안이며 최종 계약을 확인합니다.</p>${slides.filter(slide=>slide.refs.length).map(slide=>`<section><h2>${slide.title}</h2><ul>${slide.refs.map(key=>`<li>${sources[key].title}<br>${new URL(sources[key].url,location.href).href}</li>`).join('')}</ul></section>`).join('')}<p>세액 예시: 지방소득세 포함. 공제 비교표는 총급여 1억원·추가 공제 전 과세표준 7,000만원, 각 방법에 1,000만원을 별도로 사용한 경우입니다. 연금저축 단독 공제 한도 600만원·IRP 합산 900만원, 카드 기존 사용액 2,500만원·기본 한도 250만원·자녀 한도 가산 없음, 다른 한도 미사용을 가정합니다. 일반기부금은 종교단체 외 적격 단체입니다. ISA 운용소득의 과세 혜택은 별도입니다. 소득 구간별 벤처투자 세액표는 1,000만원 전액 소득공제를 가정합니다. 납입·소비·기부 공제 비교에서는 운용수익·손실을 제외합니다. 개인 경험의 수치·결과는 기재하지 않았습니다.</p><p>3년 수익 비교: 초기 자금 1,000만원만 납입, 공제액 재투자와 추가 납입 없음. ISA·연금은 표에 선택한 연 수익률(수수료 차감 후·세전)을 3년간 적용합니다. 예금은 연 3%·매년 15.4% 이자 과세 후 재예치. 일반형 ISA는 3년 정상 해지·순이익 200만원 초과분에 9.9%. 연금 계좌 유지는 인출세 차감 전 가치, 3년 후 일반 해지는 공제받은 원금과 운용수익에 16.5% 과세. 공제받지 않은 원금은 과세제외금액으로 확인되었다고 가정합니다. CB는 이자 0%·원금 전액 상환 가정입니다. 합산효과는 공제액과 운용·인출 증감액의 합계로 원금을 제외합니다. 연환산은 (1 + 합산효과 / 1,000만원)^(1/3) − 1. 환급 시점을 반영한 IRR이나 예상·보장수익률이 아닙니다. 실제 수익·세금·회수 가능성은 상품과 개인에 따라 다릅니다.</p>`;
 
 function render(animate = false) {
   document.querySelectorAll('.slide').forEach((element,index)=>{element.hidden=index!==current;});
@@ -50,7 +54,7 @@ function goTo(index, push = true) {
   const active=document.activeElement;
   const focusWasInSlide=active instanceof Element && active.closest('.slide');
   current = index;
-  if(push) history.pushState(null,'',`#slide-${current + 1}`);
+  if(push) history.pushState(null,'',`#${slides[current].id}`);
   render(true);
   if(focusWasInSlide) deck.focus({preventScroll:true});
   window.scrollTo({top:0,behavior:'instant'});
@@ -102,7 +106,7 @@ for(const dialog of [toc,notes]) {
     if(event.clientX<rect.left || event.clientX>rect.right || event.clientY<rect.top || event.clientY>rect.bottom) dialog.close();
   });
 }
-window.addEventListener('hashchange',()=>{if(/^#slide-/.test(location.hash)) goTo(indexFromHash(),false);});
+window.addEventListener('hashchange',()=>{if(/^#slide-/.test(location.hash) || slides.some(slide=>`#${slide.id}`===location.hash)) goTo(indexFromHash(),false);});
 window.addEventListener('popstate',()=>goTo(indexFromHash(),false));
 document.addEventListener('keydown',event=>{
   if(toc.open || notes.open || event.ctrlKey || event.metaKey || event.altKey || event.target.closest('input,textarea,select,[contenteditable]')) return;
@@ -115,7 +119,7 @@ document.addEventListener('keydown',event=>{
   else if(event.key.toLowerCase()==='f' && document.fullscreenEnabled) {event.preventDefault();toggleFullscreen();}
 });
 deck.addEventListener('pointerdown',event=>{
-  if(!event.isPrimary || event.pointerType==='mouse' || event.target.closest('button,a,summary,details,.table-wrap')) return;
+  if(!event.isPrimary || event.pointerType==='mouse' || event.target.closest('button,a,summary,details,input,select,textarea,.table-wrap')) return;
   pointer={id:event.pointerId,x:event.clientX,y:event.clientY,time:performance.now()};
 });
 deck.addEventListener('touchmove',event=>{
