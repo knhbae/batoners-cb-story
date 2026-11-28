@@ -4,6 +4,9 @@ export const sources = {
   local: { title: '지방세법 제92조 · 개인지방소득세 세율', url: 'https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1029492599' },
   pension: { title: '소득세법 제59조의3 · 연금계좌 세액공제', url: 'https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1001059880' },
   ntsPension: { title: '국세청 · 연금계좌 공제 한도와 공제율', url: 'https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7875&mi=6608' },
+  card: { title: '조세특례제한법 제126조의2 · 카드 공제율·문턱·한도', url: 'https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=1000669411' },
+  donation: { title: '소득세법 제59조의4 제4항 · 기부금 세액공제', url: 'https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1032903351' },
+  isa: { title: '조세특례제한법 제91조의18 · ISA 운용소득 과세특례', url: 'https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021859593' },
   faq: { title: '엔젤투자지원센터 FAQ · 투자확인·투자일·공제 시점', url: 'https://tax.kban.or.kr/svc/info/faq.do' },
   company: { title: '바토너스 홈페이지', url: 'https://batoners.com/' },
   saramin: { title: '사람인 · 바토너스 기업정보', url: 'https://www.saramin.co.kr/zf_user/company-info/view/csn/czY5ZzZWblpRVGF4VURVT1lUVEd4Zz09/company_nm/(%EC%A3%BC)%EB%B0%94%ED%86%A0%EB%84%88%EC%8A%A4' },
@@ -46,10 +49,30 @@ export const slides = [
     notes: ['서울거래: 참여 경로 / 확인한 조건 / 소득공제 경험.', '라덱셀: 지인 회사 / 정보를 확인한 과정 / 소통 경험.', '실제 투자금·날짜·절세액·상환 여부는 이 초안에 기재하지 않았습니다. 지인이라는 관계를 원금 보장 근거로 설명하지 않습니다.'], refs: []
   },
   {
-    id: 'compare', section: '공제 비교', title: '소득공제와 세액공제는 계산이 다릅니다',
-    body: `<div class="two-columns formula-columns"><div><h2>소득공제</h2><p><strong>소득을 줄인 뒤</strong><br>세율을 적용</p><span class="small">벤처투자, 신용카드 등</span></div><div><h2>세액공제</h2><p>계산된 <strong>세금에서 차감</strong></p><span class="small">연금저축·IRP 등</span></div></div><p class="scroll-hint">표를 좌우로 밀어 비교 조건을 확인하세요.</p><div class="table-wrap"><table><thead><tr><th>비교 대상</th><th>계산 기준</th><th>함께 볼 조건</th></tr></thead><tbody><tr><td>적격 벤처 직접투자</td><td>3천만원 이하분 100% 소득공제</td><td>개인별 세율·한도, 보유기간, 기업 위험</td></tr><tr><td>연금저축·IRP</td><td>납입액의 12% 또는 15% 세액공제<small>국세 기준 · 개인별 요건·한도 적용</small></td><td>연금 수령·중도 인출 조건, 운용상품 위험</td></tr></tbody></table></div>`,
-    foot: '공제율 자체보다 실제 세금 감소액·자금 회수 조건·손실 가능성을 비교합니다.',
-    notes: ['소득공제율 100%와 세액공제율 15%는 계산 대상이 달라 직접 비교할 수 없습니다.', '벤처투자는 개인별 세율과 공제 여력에 따라 절세 효과가 커질 수 있습니다. 누구에게나 다른 공제보다 유리하다고 단정하지 않습니다.', '연금계좌의 일반 공제 대상 납입한도는 연금저축 600만원, 퇴직연금 합산 900만원입니다. 국세 공제율 15%는 종합소득금액 4,500만원 이하(근로소득만 있으면 총급여 5,500만원 이하), 그 밖은 12%입니다.'], refs: ['venture', 'pension', 'ntsPension']
+    id: 'compare', section: '공제 비교', title: '같은 1,000만원, 투자·저축의 절세 효과', layout: 'comparison',
+    body: `<p class="comparison-baseline">근로자 예시 · 총급여 1억원 / 추가 공제 전 과세표준 7,000만원<br><span>각 방법에 1,000만원씩 별도로 사용한 경우 · 지방소득세 포함</span></p><div class="table-wrap"><table class="comparison-table"><thead><tr><th scope="col">1,000만원 사용 방법</th><th scope="col">세금 감소액</th><th scope="col">벤처투자와 차이<small>벤처투자가 더 줄이는 세금</small></th></tr></thead><tbody><tr class="comparison-reference"><th scope="row">적격 벤처 직접투자<small>투자금 전액 소득공제 · 원금 손실 가능</small></th><td><strong>264만원</strong></td><td>비교 기준</td></tr><tr><th scope="row">연금저축만 납입<small>600만원까지 공제 · 연금 수령 조건</small></th><td>79.2만원</td><td>+184.8만원</td></tr><tr><th scope="row">연금저축 + IRP<small>900만원까지 공제 · 연금 수령 조건</small></th><td>118.8만원</td><td>+145.2만원</td></tr><tr><th scope="row">ISA 납입<small>납입액 공제 없음 · 운용수익에 과세 혜택</small></th><td>납입 시 0원</td><td class="comparison-excluded">별도 비교</td></tr></tbody></table></div><p class="comparison-assumptions">공제 요건·한도 충족, 기존 한도 미사용·차감할 세금 충분·다른 공제 변화 없음을 가정합니다.<br>ISA는 납입액이 아닌 운용수익의 세금을 줄이므로, 이 표에서 차액을 계산하지 않습니다.</p>`,
+    foot: '당해 연도 세금 감소만 비교한 예시입니다. 운용수익·인출 시 세금·손실은 반영하지 않았습니다.',
+    notes: [
+      '같은 사람에게 추가 자금 1,000만원이 생겼을 때 각 방법을 하나씩 선택한 별도 시나리오입니다. 여러 행의 혜택을 합산하는 표가 아닙니다. 총급여 1억원과 과세표준 7,000만원은 서로 다른 개념이며, 이 예시의 과세표준은 다른 기존 공제를 반영한 금액입니다.',
+      '소득공제는 세금을 계산할 소득을 줄이고, 세액공제는 계산한 세금에서 차감합니다. 이 표는 공제율 대신 실제 세금 감소액으로 맞춰 비교했습니다.',
+      '벤처투자: 적격 직접투자 1,000만원 전액 공제. 과세표준 7,000만원 → 6,000만원, 국세 240만원 + 지방소득세 24만원 = 264만원. 종합소득금액 50% 한도와 투자 요건을 충족한다고 가정합니다.',
+      '연금저축 + IRP: 연금저축 600만원 + IRP 400만원 납입 예시. 일반 합산 공제 대상은 900만원, 총급여 5,500만원 초과자의 국세 공제율 12% 적용. 900만원 × 12% × 1.1 = 118.8만원. 나머지 100만원은 그해 세액공제 대상에서 제외됩니다. 연금저축에만 1,000만원을 넣으면 600만원 × 12% × 1.1 = 79.2만원입니다. ISA 만기자금의 연금 전환 특례는 제외합니다.',
+      'ISA: 납입액 자체에 대한 소득·세액공제는 없어 납입 시 효과를 0원으로 표시했습니다. 운용 중 발생한 이자·배당의 비과세·분리과세 혜택은 존재합니다. 실제 운용수익과 기간을 정하지 않아 금액·벤처투자와의 차액을 계산하지 않았습니다. ISA에 절세 효과가 없다는 뜻이 아닙니다.',
+      '표의 차액은 264만원에서 각 세금 감소액을 뺀 값입니다. 미래 인출·연금 수령 때의 세금, 중도 회수 추징, 운용수익, 물품·서비스의 가치와 투자 손실은 포함하지 않습니다. 투자 적합성의 순위나 벤처투자 권장 순서를 뜻하지 않습니다. 근로소득세액공제 등 다른 공제의 변화와 표준세액공제로의 전환은 없다고 가정합니다.'
+    ], refs: ['venture', 'tax', 'local', 'pension', 'isa']
+  },
+  {
+    id: 'compare-spending', section: '공제 비교', title: '소비·기부 공제와 비교하면', layout: 'comparison',
+    body: `<p class="comparison-baseline">근로자 예시 · 총급여 1억원 / 추가 공제 전 과세표준 7,000만원<br><span>각 방법에 1,000만원씩 별도로 사용한 경우 · 지방소득세 포함</span></p><div class="table-wrap"><table class="comparison-table"><thead><tr><th scope="col">1,000만원 사용 방법</th><th scope="col">세금 감소액</th><th scope="col">벤처투자와 차이<small>벤처투자가 더 줄이는 세금</small></th></tr></thead><tbody><tr class="comparison-reference"><th scope="row">적격 벤처 직접투자<small>투자금 전액 소득공제 · 원금 손실 가능</small></th><td><strong>264만원</strong></td><td>비교 기준</td></tr><tr><th scope="row">신용카드 일반 소비<small>추가 사용액의 15% 소득공제 · 소비 지출</small></th><td>39.6만원</td><td>+224.4만원</td></tr><tr><th scope="row">체크카드·현금영수증<small>30% 소득공제, 이 예시 한도 250만원 · 소비 지출</small></th><td>66만원</td><td>+198만원</td></tr><tr><th scope="row">일반기부금<small>종교단체 외 적격 단체 · 기부 지출</small></th><td>165만원</td><td>+99만원</td></tr></tbody></table></div><p class="comparison-assumptions">카드: 기존 사용액 2,500만원으로 총급여 25% 충족, 자녀 한도 가산 없음.<br>한도 미사용·차감할 세금 충분·다른 공제 변화 없음. 소비·기부금은 회수할 투자원금이 아닙니다.</p>`,
+    foot: '당해 연도 세금 감소만 비교한 예시입니다. 운용수익·인출 시 세금·손실은 반영하지 않았습니다.',
+    notes: [
+      '같은 사람에게 추가 자금 1,000만원이 생겼을 때 각 방법을 하나씩 선택한 별도 시나리오입니다. 여러 행의 혜택을 합산하는 표가 아닙니다. 총급여 1억원과 과세표준 7,000만원은 서로 다른 개념이며, 이 예시의 과세표준은 다른 기존 공제를 반영한 금액입니다.',
+      '소득공제는 세금을 계산할 소득을 줄이고, 세액공제는 계산한 세금에서 차감합니다. 이 표는 공제율 대신 실제 세금 감소액으로 맞춰 비교했습니다.',
+      '벤처투자: 적격 직접투자 1,000만원 전액 공제. 과세표준 7,000만원 → 6,000만원, 국세 240만원 + 지방소득세 24만원 = 264만원. 종합소득금액 50% 한도와 투자 요건을 충족한다고 가정합니다.',
+      '카드: 공통적으로 기존 공제 대상 일반 신용카드 사용액이 2,500만원이고, 추가 1,000만원을 일반 신용카드 또는 체크카드·현금영수증으로 지출한다고 가정합니다. 기존 사용액은 문턱만 채워 공제액이 0원입니다. 총급여 1억원, 자녀 등에 따른 한도 가산 없음, 전통시장·대중교통 등의 특별 사용분 없음. 신용카드: 1,000만원 × 15% × 26.4% = 39.6만원. 체크·현금: 1,000만원 × 30% = 300만원 중 기본 한도 250만원 × 26.4% = 66만원입니다. 문턱을 넘지 않았거나 한도를 이미 썼으면 추가 효과가 없거나 줄어듭니다.',
+      '일반기부금: 종교단체 외 적격 단체에 낸 1,000만원 전액이 공제 한도 안에 있고 기존·이월 기부금이 없다고 가정합니다. 1,000만원 × 국세 15% × 1.1 = 165만원. 정치자금·고향사랑기부금의 별도 공제율·답례품은 포함하지 않습니다. 기부금은 돌려받는 투자원금이 아닙니다.',
+      '표의 차액은 264만원에서 각 세금 감소액을 뺀 값입니다. 미래 인출·연금 수령 때의 세금, 중도 회수 추징, 운용수익, 물품·서비스의 가치와 투자 손실은 포함하지 않습니다. 투자 적합성의 순위나 벤처투자 권장 순서를 뜻하지 않습니다. 근로소득세액공제 등 다른 공제의 변화와 표준세액공제로의 전환은 없다고 가정합니다.'
+    ], refs: ['venture', 'tax', 'local', 'card', 'donation']
   },
   {
     id: 'purpose', section: '우리 구상', title: '우리 모임에서는 왜 검토하나요?',

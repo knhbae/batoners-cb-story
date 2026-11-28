@@ -1,4 +1,4 @@
-import { slides, sources } from './slides.js?v=1';
+import { slides, sources } from './slides.js?v=2';
 
 const deck = document.getElementById('slides');
 const previous = document.getElementById('previous');
@@ -23,9 +23,9 @@ deck.innerHTML = slides.map((slide, index) => `<article class="slide ${slide.lay
   <div class="slide-body">${slide.body}</div>
   <footer class="slide-footer"><p>${slide.foot}</p>${slide.refs.length ? `<button type="button" data-notes="${index}" aria-label="${slide.title} 메모와 출처 보기">근거 보기 ↗</button>` : ''}</footer>
 </article>`).join('');
-deck.querySelectorAll('.table-wrap').forEach((wrapper,index)=>{wrapper.setAttribute('role','region');wrapper.setAttribute('tabindex','0');wrapper.setAttribute('aria-label',['공제 비교표','세액 감소 예시','참여 조건'][index] || '자료 표');});
+deck.querySelectorAll('.table-wrap').forEach(wrapper=>{wrapper.setAttribute('role','region');wrapper.setAttribute('tabindex','0');wrapper.setAttribute('aria-label',`${wrapper.closest('.slide').querySelector('h1').textContent} 표`);});
 document.getElementById('toc-list').innerHTML = slides.map((slide, index) => `<li><button type="button" data-slide="${index}"><span>${String(index + 1).padStart(2, '0')}</span>${slide.title}</button></li>`).join('');
-document.getElementById('print-sources').innerHTML = `<h1>출처와 계산 가정</h1><p>설명회 초안 · 2026.11.28. 투자 조건·일정은 검토안이며 최종 계약을 확인합니다.</p>${slides.filter(slide=>slide.refs.length).map(slide=>`<section><h2>${slide.title}</h2><ul>${slide.refs.map(key=>`<li>${sources[key].title}<br>${new URL(sources[key].url,location.href).href}</li>`).join('')}</ul></section>`).join('')}<p>세액 예시: 1,000만원 전액 소득공제, 지방소득세 포함. 다른 세액공제 변화·환급 시점·복리·투자 손실 제외. 개인 경험의 수치·결과는 기재하지 않았습니다.</p>`;
+document.getElementById('print-sources').innerHTML = `<h1>출처와 계산 가정</h1><p>설명회 초안 · 2026.11.28. 투자 조건·일정은 검토안이며 최종 계약을 확인합니다.</p>${slides.filter(slide=>slide.refs.length).map(slide=>`<section><h2>${slide.title}</h2><ul>${slide.refs.map(key=>`<li>${sources[key].title}<br>${new URL(sources[key].url,location.href).href}</li>`).join('')}</ul></section>`).join('')}<p>세액 예시: 지방소득세 포함. 공제 비교표는 총급여 1억원·추가 공제 전 과세표준 7,000만원, 각 방법에 1,000만원을 별도로 사용한 경우입니다. 연금저축 단독 공제 한도 600만원·IRP 합산 900만원, 카드 기존 사용액 2,500만원·기본 한도 250만원·자녀 한도 가산 없음, 다른 한도 미사용을 가정합니다. 일반기부금은 종교단체 외 적격 단체입니다. ISA 운용소득의 과세 혜택은 별도입니다. 소득 구간별 벤처투자 세액표는 1,000만원 전액 소득공제를 가정합니다. 다른 세액공제 변화·환급 시점·복리·투자 손실 제외. 개인 경험의 수치·결과는 기재하지 않았습니다.</p>`;
 
 function render(animate = false) {
   document.querySelectorAll('.slide').forEach((element,index)=>{element.hidden=index!==current;});
