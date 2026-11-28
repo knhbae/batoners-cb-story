@@ -1,6 +1,10 @@
 import { returnsMarkup } from './returns.js?v=3';
 
 export const sources = {
+  crowdyListing: { title: '크라우디 · 투자 프로젝트 모집 화면 (2026.11.28 캡처)', url: 'https://www.ycrowdy.com/' },
+  crowdyRecs: { title: '크라우디 · 렉스이노베이션 주식형 모집 상세 (2026.11.28 확인)', url: 'https://www.ycrowdy.com/i/recsinno' },
+  fundingListing: { title: '펀딩포유 · 투자 프로젝트 모집 화면 (2026.11.28 캡처)', url: 'https://www.funding4u.co.kr/milestones/all/invest' },
+  fundingMold: { title: '펀딩포유 · 몰드 2차 CB 모집 상세 (2026.11.28 확인)', url: 'https://www.funding4u.co.kr/projects/select_show/11189' },
   market: { title: '중소벤처기업부 · 2026년 1~3분기 벤처투자 동향 (2026.11)', url: 'https://www.mss.go.kr/site/smba/ex/bbs/View.do?bcIdx=1072576&cbIdx=86&parentSeq=1072576' },
   seoul: { title: '서울거래 · 공식 회사 소개', url: 'https://seoulexchange.oopy.io/' },
   seoulCB: { title: '서울거래 · 2023.12.04 CB 모집 공지 (신청 마감)', url: 'https://www.seoulexchange.kr/boards/notices/20231204%EC%84%9C%EC%9A%B8%EA%B1%B0%EB%9E%98-%EC%A3%BC%EC%8B%9D%ED%9A%8C%EC%82%AC-%EB%B0%9C%ED%96%89-%ED%88%AC%EC%9E%90%EC%9E%90-%EB%AA%A8%EC%A7%91/' },
@@ -53,6 +57,18 @@ export const slides = [
     body: `<p class="data-period">같은 기간 비교 · 각 연도 1~3분기 · 중소벤처기업부 2026.11 발표</p><div class="market-layout"><div class="market-bars" role="img" aria-label="1~3분기 신규 벤처투자액: 2023년 7.71조원, 2024년 8.65조원, 2025년 9.84조원, 2026년 12.62조원">${[['2023',7.7118],['2024',8.6463],['2025',9.8362],['2026',12.6248]].map(([year,value])=>`<div class="market-bar-row ${year==='2026'?'current':''}"><span>${year}</span><div><i style="width:${value/14*100}%"></i></div><strong>${value.toFixed(2)}조원</strong></div>`).join('')}<p class="chart-axis">0에서 시작하는 동일 척도 · 연간 전체 금액과 구분</p></div><div class="market-stat"><span>2026년 1~3분기</span><strong>12.62조원</strong><p>전년 같은 기간보다 <b>28.4% 증가</b></p><hr><p>상위 투자 분야<br><b>ICT 서비스 · 전기·기계·장비 · 바이오·의료</b></p></div></div><div class="source-strip"><span>발표 자료를 요약하고 수치를 그래프로 다시 구성했습니다.</span>${link('market','공식 발표 원문')}</div>`,
     foot: '벤처투자회사·조합과 신기술금융사·조합의 합산 통계입니다. 개인 직접투자 소득공제 이용자 수나 수익률 통계가 아닙니다.',
     notes: ['신규 벤처투자액은 2023년 1~3분기 77,118억원, 2024년 86,463억원, 2025년 98,362억원, 2026년 126,248억원입니다. 모두 같은 1~3분기 기간과 합산 기준입니다.', '2026년 상위 투자 분야는 ICT 서비스 2.5조원, 전기·기계·장비 2.2조원, 바이오·의료 1.9조원입니다. 기업의 성장단계·산업별 상황은 다릅니다.', '시장 규모 증가가 개별 기업의 성공, 원금 회수 또는 소득공제 적격성을 보장하지 않습니다. 개인 투자 사례는 다음 회사 자료와 구분해 설명합니다.'], refs: ['market']
+  },
+  {
+    id: 'funding-stock', section: '실제 모집 사례', title: '소득공제를 내세운 주식 투자 모집', layout: 'promotion-slide',
+    body: `<div class="promotion-layout"><figure class="promotion-capture"><a href="assets/funding-examples/crowdy-recs-20261128.png" target="_blank" rel="noopener noreferrer" aria-label="크라우디 모집 화면 캡처 크게 보기"><img src="assets/funding-examples/crowdy-recs-20261128.png" width="624" height="582" alt="크라우디의 렉스이노베이션 모집 카드. 주식형이며 홍보 제목 앞에 26년 소득공제를 표시합니다."></a><figcaption>크라우디 공식 모집 화면 일부 · 클릭하면 확대</figcaption></figure><div class="promotion-details"><span class="promotion-status">모집 중 · 2026.11.28 기준</span><h2>크라우디 · 렉스이노베이션</h2><dl class="promotion-facts"><div><dt>투자 방식</dt><dd>주식형<small>상환전환우선주</small></dd></div><div><dt>청약 마감</dt><dd>2026.11.30</dd></div><div><dt>홍보 내용</dt><dd>2026년 소득공제 대상임을<br>제목에서 강조</dd></div></dl><p class="promotion-takeaway">소득공제와 함께 기업의 사업을 소개하며 투자자를 모집합니다.</p>${link('crowdyRecs','모집 상세 원문')}</div></div>`,
+    foot: '2026.11.28 확인·캡처 · 모집 홍보 사례입니다. 개인별 공제와 투자금 회수가 보장되는 것은 아닙니다.',
+    notes: ['공식 홈페이지의 투자 모집 카드에서 이미지·기업명·홍보 제목 부분만 실제 캡처했습니다. 원본 페이지의 문구·색상·구성을 바꾸지 않았습니다. 캡처 안의 말줄임표는 해당 사이트의 원래 표시입니다.', '2026.11.28 상세 페이지에서 펀딩 중, 2026.11.30 종료를 확인했습니다. 증권 발행 설명은 의결권이 배제된 상환전환우선주입니다. 모집 일정·조건은 이후 변경될 수 있습니다.', '이 사례는 주식형 공개 모집이며 이번 회사의 CB 직접 인수와 증권 종류·계약·모집 절차가 다릅니다. 상환전환우선주의 상환권도 원금 회수를 보장하지 않습니다.', '화면의 소득공제 문구는 모집 주체의 안내를 인용한 것입니다. 투자자 개인의 공제 적격성을 검증하거나 이 상품을 추천한 것으로 설명하지 않습니다.'], refs: ['crowdyListing', 'crowdyRecs']
+  },
+  {
+    id: 'funding-cb', section: '실제 모집 사례', title: 'CB 모집에도 소득공제를 표시합니다', layout: 'promotion-slide',
+    body: `<div class="promotion-layout"><figure class="promotion-capture"><a href="assets/funding-examples/funding4u-mold-20261128.png" target="_blank" rel="noopener noreferrer" aria-label="펀딩포유 모집 화면 캡처 크게 보기"><img src="assets/funding-examples/funding4u-mold-20261128.png" width="696" height="600" alt="펀딩포유의 몰드 2차 모집 카드. 전환사채 연 6%와 소득공제 표시, 12월 7일 오픈 예정 안내가 보입니다."></a><figcaption>펀딩포유 공식 모집 화면 일부 · 클릭하면 확대</figcaption></figure><div class="promotion-details"><span class="promotion-status upcoming">오픈 예정 · 2026.11.28 기준</span><h2>펀딩포유 · 몰드 2차 모집</h2><dl class="promotion-facts"><div><dt>투자 방식</dt><dd>전환사채(CB)<small>연 이자율 6%로 안내</small></dd></div><div><dt>청약 예정</dt><dd>2026.12.07 ~ 12.18</dd></div><div><dt>홍보 내용</dt><dd>이자 조건과 소득공제를<br>함께 표시</dd></div></dl><p class="promotion-takeaway">이번 투자안은 이자 0%로 검토 중입니다.<br>같은 CB라도 조건은 다릅니다.</p>${link('fundingMold','모집 상세 원문')}</div></div>`,
+    foot: '2026.11.28 확인·캡처 · 오픈 전 조건은 변경될 수 있습니다. 이자·상환 약정도 원금 보장은 아닙니다.',
+    notes: ['공식 프로젝트 목록의 유형·소득공제 표시, 이미지, 기업명·오픈 일정, 제목 부분만 실제 캡처했습니다. 원본 페이지의 문구·색상·구성을 바꾸지 않았습니다.', '2026.11.28 상세 페이지에서 청약 예정 기간 2026.12.07~12.18, 연 이자율 6%, 3개월마다 이자 지급, 납입·발행 예정일 2026.12.31을 확인했습니다. 페이지는 프로젝트 오픈 시 모집정보가 바뀔 수 있다고 안내합니다.', '이 사례의 12.18은 청약 마감 예정일입니다. 우리 계획의 12.18 납입 목표와 구분합니다. 이 사례의 일정이 우리 발행·등기·공제 서류 처리 기한에 여유가 있다는 근거는 아닙니다.', '소득공제를 홍보하는 공개 모집이 실제 존재한다는 사례입니다. 이자율·회수 조건·모집 절차는 이번 회사의 이자 0% CB 직접 인수와 다릅니다. 플랫폼을 통한 모집과 소득공제 표시가 원금·이자 지급을 보증하지 않습니다.'], refs: ['fundingListing', 'fundingMold']
   },
   {
     id: 'general-flow', section: '제도 이해', title: '투자금은 어떤 경로로 움직일까요?',

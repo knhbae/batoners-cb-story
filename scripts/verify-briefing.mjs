@@ -49,9 +49,9 @@ assert.equal(taxExamples.find(item => item.saving === 264).rate, row(3, 'hold', 
 for (const example of taxExamples) {
   assert.equal(example.rate, ((Math.cbrt(1 + example.saving / 1000) - 1) * 100).toFixed(2));
 }
-assert.equal(slides.length, 20);
+assert.equal(slides.length, 22);
 assert.equal(new Set(slides.map(slide => slide.id)).size, slides.length);
 for (const slide of slides) {
   assert.ok(slide.refs.every(key => sources[key]), `Missing source: ${slide.id}`);
 }
-console.log('PASS: 3-year cash-flow examples, tax boundaries, 10 scenarios, annualization, 20 slides and source references.');
+console.log('PASS: 3-year cash-flow examples, tax boundaries, 10 scenarios, annualization, 22 slides and source references.');

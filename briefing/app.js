@@ -1,5 +1,5 @@
 import { initializeReturns } from './returns.js?v=3';
-import { slides, sources } from './slides.js?v=3';
+import { slides, sources } from './slides.js?v=4';
 
 const deck = document.getElementById('slides');
 const previous = document.getElementById('previous');

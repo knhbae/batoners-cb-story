@@ -1,0 +1,43 @@
+[
+  {
+    "file": "crowdy-recs-20261128.png",
+    "capturedAt": "2026-11-28T10:27:20.966Z",
+    "source": "https://www.ycrowdy.com/",
+    "project": "https://www.ycrowdy.com/i/recsinno",
+    "crop": {
+      "x": 195,
+      "y": 321,
+      "width": 312,
+      "height": 291.203125
+    },
+    "method": "Unaltered browser screenshot, project card through title; no page text or styling changed.",
+    "verifiedStatus": {
+      "asOf": "2026-11-28",
+      "status": "모집 중",
+      "subscriptionCloses": "2026-11-30",
+      "security": "상환전환우선주"
+    }
+  },
+  {
+    "file": "funding4u-mold-20261128.png",
+    "capturedAt": "2026-11-28T10:30:41.465Z",
+    "source": "https://www.funding4u.co.kr/milestones/all/invest",
+    "project": "https://www.funding4u.co.kr/projects/select_show/11189",
+    "crop": {
+      "x": 152,
+      "y": 400,
+      "width": 348,
+      "height": 299.796875
+    },
+    "method": "Unaltered browser screenshot, project card through title; no page text or styling changed.",
+    "verifiedStatus": {
+      "asOf": "2026-11-28",
+      "status": "오픈 예정",
+      "subscriptionOpens": "2026-12-07",
+      "subscriptionCloses": "2026-12-18",
+      "security": "전환사채",
+      "advertisedAnnualInterestRate": "6%",
+      "conditions": "Subject to change before opening"
+    }
+  }
+]
